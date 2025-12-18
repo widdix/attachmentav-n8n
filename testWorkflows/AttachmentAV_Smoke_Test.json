@@ -1,4 +1,5 @@
 {
+  "name": "Attachment AV Smoke Tests",
   "nodes": [
     {
       "parameters": {},
@@ -153,8 +154,24 @@
       ],
       "id": "895afb9c-9f0e-41c9-b4d3-08d0135cf47e",
       "name": "Throw Error2"
+    },
+    {
+      "parameters": {
+        "path": "smoke-tests",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -240,
+        -96
+      ],
+      "id": "40d58e6b-b920-41c9-8641-89bcc02c6015",
+      "name": "Webhook",
+      "webhookId": "7c45dc78-bc75-4b8c-9cde-ab5fba696983"
     }
   ],
+  "pinData": {},
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -166,17 +183,6 @@
           },
           {
             "node": "Scan a Url for Maleware / Viruses",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Scan a Url for Maleware / Viruses": {
-      "main": [
-        [
-          {
-            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -228,11 +234,44 @@
           }
         ]
       ]
+    },
+    "Scan a Url for Maleware / Viruses": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Scan a Url for Maleware / Viruses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8b8a5bd4-3274-402f-8405-90a1c7bf2514",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "4c375f72b927a2dbcd5f4b93508002cfb7289bb0eaa35a1972cd254f5d486516"
-  }
+  },
+  "id": "CeuFKlmZoN6X5Hxe",
+  "tags": []
 }
