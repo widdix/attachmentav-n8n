@@ -1,0 +1,49 @@
+{
+  "name": "@widdix/attachmentav-n8n",
+  "version": "0.1.0",
+  "description": "This is official node for interacting with APIs from attachmentav.com",
+  "keywords": [
+    "attachemtAV",
+    "virus",
+    "malware",
+    "n8n-community-node-package"
+  ],
+  "homepage": "https://attachmentav.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/widdix/attachment-n8n.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Micahel Wittig",
+    "email": "michael@widdix.de"
+  },
+  "files": [
+    "dist",
+    "credentials"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/AttachemtAV.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/AttachemtAV/AttachemtAV.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "gulp": "^4.0.2",
+    "typescript": "~4.8.4"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "^1.64.0"
+  },
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier --write ."
+  }
+}

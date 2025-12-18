@@ -1,0 +1,58 @@
+{
+  "name": "AttachmentAV Smoke Test",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -480
+      ],
+      "id": "a5d30c27-c0f8-4a5d-a04b-ea9fb691b540",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {},
+      "type": "CUSTOM.attachmentAV",
+      "typeVersion": 1,
+      "position": [
+        176,
+        -480
+      ],
+      "id": "5caa7b87-9cd4-49d7-84e9-9775143c8b3d",
+      "name": "Scan a File for Maleware / Viruses",
+      "credentials": {
+        "attachmentAVApi": {
+          "id": "brWkYkI0RKtVwWU3",
+          "name": "AttachmentAV account 4"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Scan a File for Maleware / Viruses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c881a0c2-fd67-4066-9819-b408e1a7d54a",
+  "meta": {
+    "instanceId": "4c375f72b927a2dbcd5f4b93508002cfb7289bb0eaa35a1972cd254f5d486516",
+    "templateCredsSetupCompleted": true
+  },
+  "id": "7bx7OktEc4mWjzyS",
+  "tags": []
+}
