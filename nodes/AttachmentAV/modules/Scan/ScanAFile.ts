@@ -1,31 +1,58 @@
-import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
-import { ApiHelper } from '../ApiHelper';
+import { IExecuteFunctions, INodeExecutionData, IRequestOptions } from 'n8n-workflow';
 
 export async function executeScanAFile(
     executeFunctions: IExecuteFunctions,
-    apiHelper: ApiHelper,
+    _apiHelper: any,
     itemIndex: number
 ): Promise<INodeExecutionData> {
     const item = executeFunctions.getInputData()[itemIndex];
-    const inputType = executeFunctions.getNodeParameter('inputType', itemIndex) as string;
-    const body: any = {
-        code: `
-			const { PDFTOTEXT } = require('./utils'); 
-			input = input.file || input.urls; 
-			return PDFTOTEXT(input);`,
-        returnBinary: 'false',
-    };
-
-    if (inputType === 'binary') {
-        const binaryPropertyName = executeFunctions.getNodeParameter('binaryPropertyName', itemIndex) as string;
-        const binaryData = item.binary?.[binaryPropertyName];
-        if (!binaryData) throw new Error(`Binary property ${binaryPropertyName} not found`);
-        body.input = { file: Buffer.from(binaryData.data, 'base64') };
-    } else {
-        const url = executeFunctions.getNodeParameter('url', itemIndex) as string;
-        body.input = { urls: url };
+    const binaryPropertyName = executeFunctions.getNodeParameter('binaryPropertyName', itemIndex, 'data') as string;
+    
+    // Get binary data from the input
+    const binaryData = item.binary?.[binaryPropertyName];
+    if (!binaryData) {
+        throw new Error(`Binary property "${binaryPropertyName}" not found in input data`);
     }
 
-    const response = await apiHelper.makeRequest('n8n/pdfToText', body, false, itemIndex);
-    return { json: response, pairedItem: { item: itemIndex } };
+    // Get credentials
+    const credentials = await executeFunctions.getCredentials('attachmentAVApi');
+
+    // Convert binary data to buffer
+    const fileBuffer = Buffer.from(binaryData.data, 'base64');
+
+    // Prepare multipart/form-data request
+    const formData: any = {
+        file: {
+            value: fileBuffer,
+            options: {
+                filename: binaryData.fileName || 'file',
+                contentType: binaryData.mimeType || 'application/octet-stream',
+            },
+        },
+    };
+
+    // Make the API request
+    const options: IRequestOptions = {
+        method: 'POST',
+        url: 'https://eu.developer.attachmentav.com/v1/scan/sync/form',
+        headers: {
+            'x-api-key': credentials.apiKey as string,
+            'origin': 'n8n/scanAFile',
+        },
+        formData,
+        json: true,
+    };
+
+    const response = await executeFunctions.helpers.request(options);
+
+    // Return the response with the expected output fields
+    return {
+        json: {
+            status: response.status,
+            size: response.size,
+            realfiletype: response.realfiletype,
+            finding: response.finding,
+        },
+        pairedItem: { item: itemIndex },
+    };
 }

@@ -1,26 +1,59 @@
 {
-  "name": "AttachmentAV Smoke Test",
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -80,
-        -480
+        -240,
+        48
       ],
-      "id": "a5d30c27-c0f8-4a5d-a04b-ea9fb691b540",
+      "id": "816b45dd-e124-4a6d-ada6-68ebbf653983",
       "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "scanAUrl",
+        "url": "https://www.ikarussecurity.com/wp-content/downloads/eicar_com.zip"
+      },
+      "type": "CUSTOM.attachmentAV",
+      "typeVersion": 1,
+      "position": [
+        352,
+        -160
+      ],
+      "id": "5b4746c1-2b61-476a-aeca-afe1aa0d56e7",
+      "name": "Scan a Url for Maleware / Viruses",
+      "credentials": {
+        "attachmentAVApi": {
+          "id": "brWkYkI0RKtVwWU3",
+          "name": "AttachmentAV account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.ikarussecurity.com/wp-content/downloads/eicar_com.zip",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        144,
+        48
+      ],
+      "id": "77d6158a-945c-441f-b753-d2ec22ec550e",
+      "name": "HTTP Request"
     },
     {
       "parameters": {},
       "type": "CUSTOM.attachmentAV",
       "typeVersion": 1,
       "position": [
-        176,
-        -480
+        352,
+        48
       ],
-      "id": "5caa7b87-9cd4-49d7-84e9-9775143c8b3d",
+      "id": "1b08aa2d-8add-4baa-9475-2ecce4adabee",
       "name": "Scan a File for Maleware / Viruses",
       "credentials": {
         "attachmentAVApi": {
@@ -28,11 +61,129 @@
           "name": "AttachmentAV account 4"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1df381c8-d2c2-4537-afdd-7e37f1ee3657",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "infected",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        560,
+        48
+      ],
+      "id": "35cf8960-52a3-411d-82d5-f9b8ee8e2c30",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "throw new Error(\"Repsonse != infected\")"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        64
+      ],
+      "id": "5fbaf8d6-aa56-4d13-ba4e-1005741b5a1d",
+      "name": "Throw Error"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1df381c8-d2c2-4537-afdd-7e37f1ee3657",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "infected",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        560,
+        -160
+      ],
+      "id": "8e05b8ec-f79a-452e-815e-00567b27dbc9",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "jsCode": "throw new Error(\"Repsonse != infected\")"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        -144
+      ],
+      "id": "895afb9c-9f0e-41c9-b4d3-08d0135cf47e",
+      "name": "Throw Error2"
     }
   ],
-  "pinData": {},
   "connections": {
     "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Scan a Url for Maleware / Viruses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scan a Url for Maleware / Viruses": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
       "main": [
         [
           {
@@ -42,17 +193,46 @@
           }
         ]
       ]
+    },
+    "Scan a File for Maleware / Viruses": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Throw Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Throw Error2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "versionId": "c881a0c2-fd67-4066-9819-b408e1a7d54a",
+  "pinData": {},
   "meta": {
-    "instanceId": "4c375f72b927a2dbcd5f4b93508002cfb7289bb0eaa35a1972cd254f5d486516",
-    "templateCredsSetupCompleted": true
-  },
-  "id": "7bx7OktEc4mWjzyS",
-  "tags": []
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4c375f72b927a2dbcd5f4b93508002cfb7289bb0eaa35a1972cd254f5d486516"
+  }
 }

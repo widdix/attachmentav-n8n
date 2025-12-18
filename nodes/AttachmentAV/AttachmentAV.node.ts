@@ -38,12 +38,12 @@ export class AttachmentAV implements INodeType {
                 options: [
                     {
                         name: 'Scan',
-                        value: 'executeScan',
+                        value: 'scan',
                     },
                 ],
                 default: 'scan',
             },
-            // Operations for Convert Resource
+            // Operations for Scan Resource
             {
                 displayName: 'Operation',
                 name: 'operation',
@@ -69,29 +69,7 @@ export class AttachmentAV implements INodeType {
                 default: 'scanAFile',
             },
            
-            {
-                displayName: 'Input Type',
-                name: 'inputType',
-                type: 'options',
-                options: [
-                    {
-                        name: 'Binary',
-                        value: 'binary',
-                    },
-                    {
-                        name: 'URL',
-                        value: 'url',
-                    },
-                ],
-                default: 'binary',
-                displayOptions: {
-                    show: {
-                        resource: ['convert', 'pdf'],
-                        operation: ['pdfToPng', 'pdfToText', 'compress', 'merge', 'extractPages', 'getFormFields', 'fillForm'],
-                    },
-                },
-            },
-            // Binary Property Name
+            // Binary Property Name for Scan a File
             {
                 displayName: 'Input Binary Field',
                 name: 'binaryPropertyName',
@@ -100,14 +78,13 @@ export class AttachmentAV implements INodeType {
                 required: true,
                 displayOptions: {
                     show: {
-                        inputType: ['binary'],
-                        resource: ['convert', 'pdf'],
-                        operation: ['pdfToPng', 'pdfToText', 'compress', 'merge', 'extractPages', 'getFormFields', 'fillForm'],
+                        resource: ['scan'],
+                        operation: ['scanAFile'],
                     },
                 },
-                description: 'The name of the binary property containing the data.',
+                description: 'The name of the binary property containing the file to scan (max 10 MB).',
             },
-            // URL Input
+            // URL Input for Scan a URL
             {
                 displayName: 'URL',
                 name: 'url',
@@ -116,57 +93,11 @@ export class AttachmentAV implements INodeType {
                 required: true,
                 displayOptions: {
                     show: {
-                        inputType: ['url'],
-                        resource: ['convert', 'pdf'],
-                        operation: ['pdfToPng', 'pdfToText', 'compress', 'extractPages'],
+                        resource: ['scan'],
+                        operation: ['scanAUrl'],
                     },
                 },
-                description: 'URL of the file to process.',
-            },
-            // URL Input for Merge (Array)
-            {
-                displayName: 'URLs',
-                name: 'urls',
-                type: 'string',
-                default: '',
-                required: true,
-                displayOptions: {
-                    show: {
-                        inputType: ['url'],
-                        resource: ['pdf'],
-                        operation: ['merge'],
-                    },
-                },
-                description: 'Comma-separated URLs of the files to process.',
-            },
-            {
-                displayName: 'Output Filename',
-                name: 'outputFilenamePdf',
-                type: 'string',
-                default: 'output.pdf',
-                required: false,
-                displayOptions: {
-                    show: {
-                        resource: ['convert', 'pdf'],
-                        operation: ['htmlToPdf', 'compress', 'merge', 'extractPages', 'fillForm', 'generateInvoice'],
-                    },
-                },
-                description: 'Name of the output file (including extension).',
-            },
-            // Output Filename (PNG)
-            {
-                displayName: 'Output Filename',
-                name: 'outputFilenamePng',
-                type: 'string',
-                default: 'output.png',
-                required: false,
-                displayOptions: {
-                    show: {
-                        resource: ['convert', 'web'],
-                        operation: ['pdfToPng', 'screenshot'],
-                    },
-                },
-                description: 'Name of the output file (including extension).',
+                description: 'URL of the file to download and scan for viruses.',
             },
         ],
     };
