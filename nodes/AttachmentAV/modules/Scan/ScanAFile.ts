@@ -17,8 +17,8 @@ export async function executeScanAFile(
     // Get credentials
     const credentials = await executeFunctions.getCredentials('attachmentAVApi');
 
-    // Convert binary data to buffer
-    const fileBuffer = Buffer.from(binaryData.data, 'base64');
+    // Convert binary data to buffer using the helper method (works with cloud instances and distributed workers)
+    const fileBuffer = await executeFunctions.helpers.getBinaryDataBuffer(itemIndex, binaryPropertyName);
 
     // Prepare multipart/form-data request
     const formData: any = {
