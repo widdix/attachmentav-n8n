@@ -1,17 +1,7 @@
-{
-  "name": "Attachment AV Smoke Tests",
-  "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -240,
-        48
-      ],
-      "id": "816b45dd-e124-4a6d-ada6-68ebbf653983",
-      "name": "When clicking ‘Execute workflow’"
-    },
+[
+  {
+    "name": "Attachment AV Smoke Tests",
+    "nodes": [
     {
       "parameters": {
         "operation": "scanAUrl",
@@ -40,7 +30,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        144,
+        128,
         48
       ],
       "id": "77d6158a-945c-441f-b753-d2ec22ec550e",
@@ -154,26 +144,63 @@
       ],
       "id": "895afb9c-9f0e-41c9-b4d3-08d0135cf47e",
       "name": "Throw Error2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        -160
+      ],
+      "id": "816b45dd-e124-4a6d-ada6-68ebbf653983",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "path": "smoke-test",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -256,
+        80
+      ],
+      "id": "9f56f857-58fe-4337-b4cb-80fbb5da504a",
+      "name": "Webhook",
+      "webhookId": "f19ef0a8-93dd-4c80-801a-25c89a9843aa"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1216,
+        -80
+      ],
+      "id": "77ee64fa-6ad9-4721-8b3e-0d26355b700a",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "GREEN",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1424,
+        -80
+      ],
+      "id": "82238f68-5220-4058-9dd9-4aa3190a0747",
+      "name": "Respond to Webhook"
     }
   ],
   "pinData": {},
   "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Scan a Url for Maleware / Viruses",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "HTTP Request": {
       "main": [
         [
@@ -198,7 +225,13 @@
     },
     "If": {
       "main": [
-        [],
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ],
         [
           {
             "node": "Throw Error",
@@ -210,7 +243,13 @@
     },
     "If1": {
       "main": [
-        [],
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "Throw Error2",
@@ -230,17 +269,56 @@
           }
         ]
       ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Scan a Url for Maleware / Viruses",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Scan a Url for Maleware / Viruses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "versionId": "ccd88962-191a-4269-87b9-6bf99cbfdd01",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "c80638ed3c3887b6222bff6d89725cadf8d99a75a1164b82787499954c943ead"
-  },
-  "id": "CeuFKlmZoN6X5Hxe",
-  "tags": []
-}
+    "active": false,
+    "settings": {
+      "executionOrder": "v1"
+    },
+    "versionId": "6724cb3c-ef46-4f79-a822-4a8a70bbd366",
+    "tags": []
+  }
+]

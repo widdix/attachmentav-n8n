@@ -25,16 +25,16 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/AttachemtAV.credentials.js"
+      "dist/credentials/AttachmentAVApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/AttachemtAV/AttachemtAV.node.js"
+      "dist/nodes/AttachmentAV/AttachmentAV.node.js"
     ]
   },
   "devDependencies": {
     "@types/node": "^16.11.7",
     "gulp": "^4.0.2",
-    "typescript": "~4.8.4"
+    "typescript": "^5.0.0"
   },
   "peerDependencies": {
     "n8n-workflow": "^1.64.0"

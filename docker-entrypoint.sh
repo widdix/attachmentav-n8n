@@ -6,7 +6,7 @@ N8N_PID=$!
 
 # Wait for n8n to be ready
 echo "Waiting for n8n to initialize..."
-sleep 10
+sleep 15
 
 # Create AttachmentAV API credentials if they don't exist
 echo "Setting up AttachmentAV API credentials..."

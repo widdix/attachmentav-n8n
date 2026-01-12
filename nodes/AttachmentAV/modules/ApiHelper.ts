@@ -1,41 +1,35 @@
-import {
-    IExecuteFunctions,
-    IDataObject,
-} from 'n8n-workflow';
+import { IExecuteFunctions, IDataObject } from 'n8n-workflow';
 
 export class ApiHelper {
     constructor(private executeFunctions: IExecuteFunctions) { }
 
     async makeRequest(
-        origin: string,
-        body: IDataObject,
-        returnBinary: boolean = false,
-        itemIndex: number = 0
+        method: string,
+        endpoint: string,
+        options: any = {},
     ): Promise<any> {
-        const credentials = await this.executeFunctions.getCredentials('attachmentAV');
+        const credentials = await this.executeFunctions.getCredentials('attachmentAVApi');
 
-        const options: any = {
-            url: `https://eu.developer.attachmentav.com/v1/scan`,
-            method: 'POST',
+        const requestOptions: any = {
+            method,
+            url: `https://eu.developer.attachmentav.com/v1${endpoint}`,
             headers: {
-                'origin': origin,
                 'x-api-key': credentials.apiKey,
             },
-            body: {
-                ...body,
-                returnBinary: returnBinary ? 'true' : 'false',
-            },
-            json: true,
+            ...options,
         };
 
-        if (returnBinary) {
-            options.encoding = 'arraybuffer';
+        if (options.headers) {
+            requestOptions.headers = {
+                ...requestOptions.headers,
+                ...options.headers,
+            };
         }
 
         return this.executeFunctions.helpers.httpRequestWithAuthentication.call(
             this.executeFunctions,
-            'attachmentAV',
-            options
+            'attachmentAVApi',
+            requestOptions
         );
     }
 }
