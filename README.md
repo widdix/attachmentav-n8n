@@ -1,6 +1,6 @@
 ![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
 
-# @widdix/attachmentav-n8n
+# @widdix/n8n-nodes-attachmentav
 
 This is an n8n community node. It lets interact with official API of [attachmentAV](https://attachmentav.com/)
 
@@ -17,12 +17,11 @@ This package contains nodes to scan a file oder url for Male / Viruses.
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
-Use the package at [here](https://www.npmjs.com/package/@widdix/attachment-n8n).
+The npm package name is [@widdix/n8n-nodes-attachmentav](https://www.npmjs.com/package/@widdix/n8n-nodes-attachmentav).
 
 ## Credentials
 
-Add your Api Key and store securely
-
+Add your Api Key and store securely.
 
 ## Usage
 
