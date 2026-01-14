@@ -7,7 +7,7 @@ import {
 
 export class AttachmentAVApi implements ICredentialType {
   name = "attachmentAVApi";
-  displayName = "AttachmentAV API";
+  displayName = "attachmentAV API";
   documentationUrl = "https://attachmentav.com/";
   properties: INodeProperties[] = [
     {
@@ -16,7 +16,7 @@ export class AttachmentAVApi implements ICredentialType {
       type: "string",
       typeOptions: { password: true },
       default: "",
-      description: "You can get API Key for AttachmentAV from https://attachmentav.com/",
+      description: "You can get API Key for attachmentAV from https://attachmentav.com/",
       required: true,
     },
   ];

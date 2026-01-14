@@ -2,7 +2,7 @@
 
 # @widdix/attachmentav-n8n
 
-This is an n8n community node. It lets interact with official API of [AttachmentAV](https://attachmentav.com/)
+This is an n8n community node. It lets interact with official API of [attachmentAV](https://attachmentav.com/)
 
 This package contains nodes to scan a file oder url for Male / Viruses.
 
@@ -29,14 +29,14 @@ Add your Api Key and store securely
 ### "Scan A File" node
 
 - Add the HTML to PDF node to your workflow
-- Configure your AttachmentAV API credentials
+- Configure your attachmentAV API credentials
 - Input your HTML content
 - Execute the workflow to generate PDF
 
 ### "Scan A Url" node
 
 - Add the Merge PDFs node to your workflow
-- Configure your AttachmentAV API credentials
+- Configure your attachmentAV API credentials
 - Input PDF files as an array with the same field name to merge.
 - If total size of files exceeds 6MB, pass it as an array of URL seperated by comma.
 - Execute the workflow to get merged PDF file.

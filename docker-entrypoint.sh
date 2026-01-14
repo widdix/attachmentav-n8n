@@ -8,8 +8,8 @@ N8N_PID=$!
 echo "Waiting for n8n to initialize..."
 sleep 15
 
-# Create AttachmentAV API credentials if they don't exist
-echo "Setting up AttachmentAV API credentials..."
+# Create attachmentAV API credentials if they don't exist
+echo "Setting up attachmentAV API credentials..."
 
 # Create a temporary credentials file with the API key from environment variable
 if [ -n "$ATTACHMENT_API_KEY" ]; then
