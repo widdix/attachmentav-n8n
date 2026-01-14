@@ -12,7 +12,7 @@ sleep 15
 echo "Setting up attachmentAV API credentials..."
 
 # Create a temporary credentials file with the API key from environment variable
-if [ -n "$ATTACHMENT_API_KEY" ]; then
+if [ -n "$ATTACHMENTAV_API_KEY" ]; then
   echo "Injecting API key from environment variable..."
   cat > /tmp/attachmentav-credentials-temp.json <<EOF
 [
@@ -21,7 +21,7 @@ if [ -n "$ATTACHMENT_API_KEY" ]; then
     "name": "AttachmentAV Account",
     "type": "attachmentAVApi",
     "data": {
-      "apiKey": "$ATTACHMENT_API_KEY"
+      "apiKey": "$ATTACHMENTAV_API_KEY"
     }
   }
 ]
@@ -29,7 +29,7 @@ EOF
   n8n import:credentials --input=/tmp/attachmentav-credentials-temp.json 2>/dev/null || echo "Credentials already exist or import failed"
   rm -f /tmp/attachmentav-credentials-temp.json
 else
-  echo "Error: ATTACHMENT_API_KEY environment variable not set. Please set it in your .env file."
+  echo "Error: ATTACHMENTAV_API_KEY environment variable not set. Please set it in your .env file."
   exit 1
 fi
 
