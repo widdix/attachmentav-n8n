@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "This is official node for interacting with APIs from attachmentav.com",
   "keywords": [
-    "attachemtAV",
+    "attachmentAV",
     "virus",
     "malware",
     "n8n-community-node-package"
