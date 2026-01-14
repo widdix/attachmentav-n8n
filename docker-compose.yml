@@ -18,7 +18,7 @@ services:
       - ATTACHMENTAV_API_KEY=${ATTACHMENTAV_API_KEY}
     volumes:
       - n8n_data:/home/node/.n8n
-      - ./dist:/home/node/.n8n/custom/node_modules/@widdix/n8n-nodes-attachmentav
+      - ./dist:/home/node/.n8n/custom/node_modules/@attachmentav/n8n-nodes-attachmentav
       - ./testWorkflows:/tmp/workflows:ro
       - ./docker-entrypoint.sh:/docker-entrypoint.sh:ro
     entrypoint: ["/bin/sh", "/docker-entrypoint.sh"]
