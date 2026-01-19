@@ -1,5 +1,4 @@
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
-import FormData = require('form-data');
 
 export async function executeScanAFile(
     executeFunctions: IExecuteFunctions,
@@ -16,15 +15,26 @@ export async function executeScanAFile(
 
     const fileBuffer = await executeFunctions.helpers.getBinaryDataBuffer(itemIndex, binaryPropertyName);
 
-    const form = new FormData();
-    form.append('file', fileBuffer, {
-        filename: binaryData.fileName || 'file',
-        contentType: 'application/octet-stream',
-    });
+    const fileName = binaryData.fileName || 'file';
+    const mimeType = binaryData.mimeType || 'application/octet-stream';
+    const boundary = `----n8nFormBoundary${Date.now()}`;
+    const preamble =
+        `--${boundary}\r\n` +
+        `Content-Disposition: form-data; name="file"; filename="${fileName}"\r\n` +
+        `Content-Type: ${mimeType}\r\n\r\n`;
+    const closing = `\r\n--${boundary}--\r\n`;
+    const bodyBuffer = Buffer.concat([
+        Buffer.from(preamble, 'utf8'),
+        fileBuffer,
+        Buffer.from(closing, 'utf8'),
+    ]);
 
     const response = await apiHelper.makeRequest('POST', '/scan/sync/form', {
-        body: form,
-        headers: form.getHeaders(),
+        body: bodyBuffer,
+        headers: {
+            'Content-Type': `multipart/form-data; boundary=${boundary}`,
+            'Content-Length': bodyBuffer.length.toString(),
+        },
         json: false,
     });
 

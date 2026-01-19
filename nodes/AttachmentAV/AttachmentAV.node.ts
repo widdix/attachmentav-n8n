@@ -1,10 +1,9 @@
 import {
-    IExecuteFunctions,
-    INodeExecutionData,
-    INodeType,
-    INodeTypeDescription,
+    type IExecuteFunctions,
+    type INodeExecutionData,
+    type INodeType,
+    type INodeTypeDescription,
     NodeOperationError,
-    NodeConnectionType,
 } from 'n8n-workflow';
 
 import { ApiHelper } from './modules/ApiHelper';
@@ -21,8 +20,8 @@ export class AttachmentAV implements INodeType {
         defaults: {
             name: 'AttachmentAV',
         },
-        inputs: [NodeConnectionType.Main],
-        outputs: [NodeConnectionType.Main],
+        inputs: ['main'],
+        outputs: ['main'],
         credentials: [
             {
                 name: 'attachmentAVApi',
