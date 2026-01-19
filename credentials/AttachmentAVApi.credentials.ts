@@ -16,7 +16,7 @@ export class AttachmentAVApi implements ICredentialType {
       type: "string",
       typeOptions: { password: true },
       default: "",
-      description: "You can get API Key for attachmentAV from https://attachmentav.com/",
+      description: "You can get API Key for attachmentAV from https://attachmentav.com/subscribe/n8n/",
       required: true,
     },
   ];
