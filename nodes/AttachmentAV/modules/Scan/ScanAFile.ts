@@ -15,25 +15,11 @@ export async function executeScanAFile(
 
     const fileBuffer = await executeFunctions.helpers.getBinaryDataBuffer(itemIndex, binaryPropertyName);
 
-    const fileName = binaryData.fileName || 'file';
-    const mimeType = binaryData.mimeType || 'application/octet-stream';
-    const boundary = `----n8nFormBoundary${Date.now()}`;
-    const preamble =
-        `--${boundary}\r\n` +
-        `Content-Disposition: form-data; name="file"; filename="${fileName}"\r\n` +
-        `Content-Type: ${mimeType}\r\n\r\n`;
-    const closing = `\r\n--${boundary}--\r\n`;
-    const bodyBuffer = Buffer.concat([
-        Buffer.from(preamble, 'utf8'),
-        fileBuffer,
-        Buffer.from(closing, 'utf8'),
-    ]);
-
-    const response = await apiHelper.makeRequest('POST', '/scan/sync/form', {
-        body: bodyBuffer,
+    const response = await apiHelper.makeRequest('POST', '/scan/sync/binary', {
+        body: fileBuffer,
         headers: {
-            'Content-Type': `multipart/form-data; boundary=${boundary}`,
-            'Content-Length': bodyBuffer.length.toString(),
+          'Content-Type': 'application/octet-stream',
+          'Content-Length': `${fileBuffer.length}`
         },
         json: false,
     });
