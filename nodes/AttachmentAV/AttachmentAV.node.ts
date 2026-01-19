@@ -3,6 +3,7 @@ import {
     type INodeExecutionData,
     type INodeType,
     type INodeTypeDescription,
+    NodeConnectionTypes,
     NodeOperationError,
 } from 'n8n-workflow';
 
@@ -20,8 +21,8 @@ export class AttachmentAV implements INodeType {
         defaults: {
             name: 'AttachmentAV',
         },
-        inputs: ['main'],
-        outputs: ['main'],
+        inputs: [NodeConnectionTypes.Main],
+        outputs: [NodeConnectionTypes.Main],
         credentials: [
             {
                 name: 'attachmentAVApi',
