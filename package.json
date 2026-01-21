@@ -39,6 +39,11 @@
   "peerDependencies": {
     "n8n-workflow": "2.4.2"
   },
+  "pnpm": {
+    "overrides": {
+      "form-data": "4.0.5"
+    }
+  },
   "type": "commonjs",
   "main": "index.js",
   "scripts": {

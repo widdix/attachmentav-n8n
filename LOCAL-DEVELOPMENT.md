@@ -4,13 +4,13 @@ To test your local changes using Docker:
 
 ## Prerequisites
 - Docker and Docker Compose installed
-- Node.js and npm installed
+- Node.js and pnpm installed
 
 ## Setup Steps
 
 1. **Build the package:**
    ```bash
-   npm run build
+   pnpm run build
    ```
 
 2. **Start n8n with Docker:**
@@ -23,7 +23,7 @@ To test your local changes using Docker:
 After making code changes:
 
 ```bash
-npm run build && docker restart n8n-dev
+pnpm run build && docker restart n8n-dev
 ```
 
 To view logs:
