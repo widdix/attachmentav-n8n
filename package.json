@@ -37,13 +37,7 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "n8n-workflow": "2.5.0"
-  },
-  "overrides": {
-    "n8n-workflow": {
-      "form-data": "4.0.5",
-      "lodash": "4.17.23"
-    }
+    "n8n-workflow": "*"
   },
   "type": "commonjs",
   "main": "index.js",
