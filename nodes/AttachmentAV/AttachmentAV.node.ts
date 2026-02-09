@@ -58,12 +58,12 @@ export class AttachmentAV implements INodeType {
                     {
                         name: 'Scan a File',
                         value: 'scanAFile',
-                        action: 'Scan a File for Maleware / Viruses',
+                        action: 'Scan a File for Viruses/Malware',
                     },
                     {
                         name: 'Scan A Url',
                         value: 'scanAUrl',
-                        action: 'Scan a Url for Maleware / Viruses',
+                        action: 'Scan a Url for Viruses/Malware',
                     },
                 ],
                 default: 'scanAFile',
