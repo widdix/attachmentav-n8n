@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/node": "25.3.0",
     "gulp": "5.0.1",
-    "typescript": "5.9.3"
+    "typescript": "6.0.2"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
