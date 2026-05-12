@@ -3,12 +3,14 @@ import {
   ICredentialTestRequest,
   ICredentialType,
   INodeProperties,
+  Icon,
 } from "n8n-workflow";
 
 export class AttachmentAVApi implements ICredentialType {
   name = "attachmentAVApi";
   displayName = "attachmentAV API";
   documentationUrl = "https://attachmentav.com/";
+  icon: Icon = 'file:attachmentAV.svg' as Icon;
   properties: INodeProperties[] = [
     {
       displayName: "API Key",

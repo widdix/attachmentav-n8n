@@ -22,6 +22,5 @@ services:
       - ./testWorkflows:/tmp/workflows:ro
       - ./docker-entrypoint.sh:/docker-entrypoint.sh:ro
     entrypoint: ["/bin/sh", "/docker-entrypoint.sh"]
-
 volumes:
   n8n_data:
