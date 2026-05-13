@@ -11,7 +11,7 @@
   "homepage": "https://attachmentav.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/widdix/attachmentav-n8n.git"
+    "url": "git+https://github.com/widdix/attachmentav-n8n.git"
   },
   "license": "MIT",
   "author": {
