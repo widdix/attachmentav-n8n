@@ -1,4 +1,4 @@
-import { IExecuteFunctions, IDataObject } from 'n8n-workflow';
+import { IExecuteFunctions } from 'n8n-workflow';
 
 export class ApiHelper {
     constructor(private executeFunctions: IExecuteFunctions) { }
@@ -8,14 +8,9 @@ export class ApiHelper {
         endpoint: string,
         options: any = {},
     ): Promise<any> {
-        const credentials = await this.executeFunctions.getCredentials('attachmentAVApi');
-
         const requestOptions: any = {
             method,
             url: `https://eu.developer.attachmentav.com/v1${endpoint}`,
-            headers: {
-                'x-api-key': credentials.apiKey,
-            },
             ...options,
         };
 

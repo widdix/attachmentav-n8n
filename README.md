@@ -27,15 +27,16 @@ Add your Api Key and store securely.
 
 ### "Scan A File" node
 
-- Add the HTML to PDF node to your workflow
+- Add the AttachmentAV node to your workflow
 - Configure your attachmentAV API credentials
-- Input your HTML content
-- Execute the workflow to generate PDF
+- Set Resource to "Scan" and Operation to "Scan a File"
+- Connect a node that provides binary data (e.g. a file download node) to the AttachmentAV node
+- Execute the workflow to scan the file for viruses and malware
 
 ### "Scan A Url" node
 
-- Add the Merge PDFs node to your workflow
+- Add the AttachmentAV node to your workflow
 - Configure your attachmentAV API credentials
-- Input PDF files as an array with the same field name to merge.
-- If total size of files exceeds 6MB, pass it as an array of URL seperated by comma.
-- Execute the workflow to get merged PDF file.
+- Set Resource to "Scan" and Operation to "Scan A Url"
+- Enter the URL of the file you want to scan
+- Execute the workflow to scan the URL target for viruses and malware

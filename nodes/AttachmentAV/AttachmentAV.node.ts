@@ -4,7 +4,8 @@ import {
     type INodeType,
     type INodeTypeDescription,
     NodeConnectionTypes,
-    NodeOperationError,
+    NodeApiError,
+    JsonObject,
 } from 'n8n-workflow';
 
 import { ApiHelper } from './modules/ApiHelper';
@@ -18,6 +19,7 @@ export class AttachmentAV implements INodeType {
         group: ['transform'],
         version: 1,
         description: 'Scan your files and attachments stored in the cloud for viruses, worms, and trojans. attachmentAV detects malware in real-time.',
+        subtitle: "={{$parameter['resource'] + ': ' + $parameter['operation']}}",
         defaults: {
             name: 'AttachmentAV',
         },
@@ -123,7 +125,7 @@ export class AttachmentAV implements INodeType {
                     returnData.push({ json: { error: (error as Error).message }, pairedItem: { item: i } });
                     continue;
                 }
-                throw new NodeOperationError(this.getNode(), error as Error, { itemIndex: i });
+                throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
             }
         }
 
