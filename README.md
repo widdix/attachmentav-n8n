@@ -4,14 +4,13 @@
 
 This is an n8n community node. It lets interact with official API of [attachmentAV](https://attachmentav.com/)
 
-This package contains nodes to scan a file oder url for Male / Viruses.
+This package contains nodes to scan a file or URL for malware and viruses.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
 - [Installation](#installation)
 - [Credentials](#credentials)
 - [Usage](#usage)
-- [Resources](#resources)
 
 ## Installation
 
@@ -21,11 +20,11 @@ The npm package name is [@attachmentav/n8n-nodes-attachmentav](https://www.npmjs
 
 ## Credentials
 
-Add your Api Key and store securely.
+This n8n community node requires an attachmentAV subscription and API key: [Get API key](https://attachmentav.com/subscribe/n8n/).
 
 ## Usage
 
-### "Scan A File" node
+### "Scan a File" node
 
 - Add the AttachmentAV node to your workflow
 - Configure your attachmentAV API credentials
@@ -33,10 +32,10 @@ Add your Api Key and store securely.
 - Connect a node that provides binary data (e.g. a file download node) to the AttachmentAV node
 - Execute the workflow to scan the file for viruses and malware
 
-### "Scan A Url" node
+### "Scan a URL" node
 
 - Add the AttachmentAV node to your workflow
 - Configure your attachmentAV API credentials
-- Set Resource to "Scan" and Operation to "Scan A Url"
+- Set Resource to "Scan" and Operation to "Scan a URL"
 - Enter the URL of the file you want to scan
 - Execute the workflow to scan the URL target for viruses and malware

@@ -14,7 +14,7 @@
         -160
       ],
       "id": "5b4746c1-2b61-476a-aeca-afe1aa0d56e7",
-      "name": "Scan a Url for Maleware / Viruses",
+      "name": "Scan a URL for Malware / Viruses",
       "credentials": {
         "attachmentAVApi": {
           "id": "BFGbk0a71fKWY967",
@@ -45,7 +45,7 @@
         48
       ],
       "id": "1b08aa2d-8add-4baa-9475-2ecce4adabee",
-      "name": "Scan a File for Maleware / Viruses",
+      "name": "Scan a File for Malware / Viruses",
       "credentials": {
         "attachmentAVApi": {
           "id": "BFGbk0a71fKWY967",
@@ -205,14 +205,14 @@
       "main": [
         [
           {
-            "node": "Scan a File for Maleware / Viruses",
+            "node": "Scan a File for Malware / Viruses",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Scan a File for Maleware / Viruses": {
+    "Scan a File for Malware / Viruses": {
       "main": [
         [
           {
@@ -259,7 +259,7 @@
         ]
       ]
     },
-    "Scan a Url for Maleware / Viruses": {
+    "Scan a URLfor Malware / Viruses": {
       "main": [
         [
           {
@@ -274,7 +274,7 @@
       "main": [
         [
           {
-            "node": "Scan a Url for Maleware / Viruses",
+            "node": "Scan a URL for Malware / Viruses",
             "type": "main",
             "index": 0
           },
@@ -295,7 +295,7 @@
             "index": 0
           },
           {
-            "node": "Scan a Url for Maleware / Viruses",
+            "node": "Scan a URL for Malware / Viruses",
             "type": "main",
             "index": 0
           }
