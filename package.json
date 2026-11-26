@@ -45,5 +45,8 @@
     "build": "tsc && gulp build:icons",
     "dev": "tsc --watch",
     "format": "prettier --write ."
+  },
+  "overrides": {
+    "zod": "^4.6.6"
   }
 }
